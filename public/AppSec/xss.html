@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Attack</title>
+    <link rel="stylesheet" href="../../css/pagestyle.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #explanation {
+            margin-bottom: 20px;
+        }
+        #attack-example {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        #attack-output {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>XSS Attack and Remediation</h1>
+
+    <div id="explanation">
+        <h2>What is XSS Attack?</h2>
+        <p>XSS (Cross-Site Scripting) is a type of security vulnerability typically found in web applications. It occurs when an attacker injects malicious scripts into web pages viewed by other users. These scripts can steal sensitive data, session cookies, or perform actions on behalf of the victim user.</p>
+        <p>XSS attacks can be classified into three types: Reflected XSS, Stored XSS, and DOM-based XSS.</p>
+    </div>
+
+    <div id="attack-example">
+        <h2>Example of XSS Attack</h2>
+        <p>Consider a website with a comment section where users can input their comments:</p>
+        <pre><code>&lt;script&gt;alert('XSS Attack!')&lt;/script&gt;</code></pre>
+        <p>If this input is not properly sanitized, the script will be executed when the comment is displayed to other users, potentially causing harm.</p>
+    </div>
+
+    <div id="attack-output">
+        <h2>Remediation</h2>
+        <p>To mitigate XSS attacks, web developers should:</p>
+        <ul>
+            <li>Sanitize and validate input data: Filter and escape user-generated content to prevent script execution.</li>
+            <li>Use security headers: Implement Content Security Policy (CSP) to restrict the sources from which resources can be loaded.</li>
+            <li>Encode output: Encode HTML entities before rendering them in web pages.</li>
+            <li>Update frameworks and libraries: Keep software dependencies up-to-date to patch known vulnerabilities.</li>
+        </ul>
+    </div>
+
+
+</body>
+</html>

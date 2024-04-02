@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection</title>
+    <link rel="stylesheet" href="../../css/pagestyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css">
+    <!-- Include Prism.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <!-- Include language support (optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-java.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #explanation {
+            margin-bottom: 20px;
+        }
+        #attack-example {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        #attack-output {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SQL Injection and Remediation</h1>
+
+    <div id="explanation">
+        <h2>What is SQL Injection?</h2>
+        <p>SQL Injection is a type of security vulnerability that occurs when malicious SQL queries are inserted into input fields or parameters of a web application's SQL queries. Attackers can manipulate these queries to gain unauthorized access to a database, execute arbitrary SQL commands, and retrieve or modify sensitive data.</p>
+    </div>
+
+    <div id="attack-example">
+        <h2>Example of SQL Injection</h2>
+        <p>Consider a web application with a login form:</p>
+        <ul>
+            <li>The application constructs an SQL query to authenticate users based on the provided username and password.</li>
+            <li>An attacker enters a malicious SQL code (e.g., ' OR '1'='1') into the username or password field.</li>
+            <li>The application's SQL query is manipulated by the attacker, bypassing authentication and granting unauthorized access to the system.</li>
+        </ul>
+    </div>
+
+    <div id="attack-output">
+        <h2>Remediation</h2>
+        <p>To mitigate SQL Injection vulnerabilities, web developers should:</p>
+        <ul>
+            <li>Use parameterized queries: Utilize prepared statements or parameterized queries to securely pass user input as parameters to SQL queries.</li>
+            <li>Implement input validation and sanitization: Validate and sanitize user input to ensure that it does not contain malicious SQL code or special characters.</li>
+            <li>Apply least privilege principle: Limit database user permissions and access rights to minimize the impact of SQL Injection attacks.</li>
+            <li>Regularly update database software: Keep database management systems (DBMS) and libraries up-to-date to patch known vulnerabilities and weaknesses.</li>
+        </ul>
+    </div>
+    <div id="source-code-example">
+        <h2>Source code example</h1>
+        <p>Below is an example of Java code featuring a sql injection:</p>
+        <pre><code class="language-java">
+            import java.sql.*;
+
+            public class SQLInjectionExample {
+            
+                public static void main(String[] args) {
+                    String username = "' OR '1'='1"; // Simulate malicious SQL injection input
+                    String password = "' OR '1'='1"; // Simulate malicious SQL injection input
+            
+                    try {
+                        // Establishing a connection to the database
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/example_db", "username", "password");
+            
+                        // Constructing the SQL query with user input
+                        String sqlQuery = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'";
+            
+                        // Creating a statement
+                        Statement statement = connection.createStatement();
+            
+                        // Executing the SQL query
+                        ResultSet resultSet = statement.executeQuery(sqlQuery);
+            
+                        // Checking if the result set contains any rows
+                        if (resultSet.next()) {
+                            // User authenticated
+                            System.out.println("User authenticated successfully!");
+                        } else {
+                            // Authentication failed
+                            System.out.println("Authentication failed!");
+                        }
+            
+                        // Closing resources
+                        resultSet.close();
+                        statement.close();
+                        connection.close();
+            
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        </code></pre>
+    </div>
+</body>
+</html>

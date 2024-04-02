@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broken Access Control</title>
+    <link rel="stylesheet" href="../../css/pagestyle.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #explanation {
+            margin-bottom: 20px;
+        }
+        #attack-example {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        #attack-output {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Broken Access Control and Remediation</h1>
+
+    <div id="explanation">
+        <h2>What is Broken Access Control?</h2>
+        <p>Broken Access Control is a security vulnerability that allows unauthorized users to access restricted resources or perform unauthorized actions within a web application. It occurs when access controls are not properly implemented or enforced, allowing attackers to bypass authentication mechanisms and gain unauthorized access to sensitive data or functionality.</p>
+    </div>
+
+    <div id="attack-example">
+        <h2>Example of Broken Access Control</h2>
+        <p>Consider a web application that manages user profiles:</p>
+        <ul>
+            <li>User A should only be able to view and edit their own profile.</li>
+            <li>User B, however, is able to access User A's profile by modifying the URL directly.</li>
+        </ul>
+        <p>This lack of proper access controls allows User B to view or modify User A's profile, leading to unauthorized access to sensitive information.</p>
+    </div>
+
+    <div id="attack-output">
+        <h2>Remediation</h2>
+        <p>To mitigate Broken Access Control vulnerabilities, web developers should:</p>
+        <ul>
+            <li>Implement proper access controls: Ensure that access controls are properly defined and enforced throughout the application.</li>
+            <li>Use role-based access control (RBAC): Assign specific roles and permissions to users based on their roles and responsibilities.</li>
+            <li>Implement least privilege principle: Only grant users the minimum level of access required to perform their tasks.</li>
+            <li>Regularly audit and review access controls: Continuously monitor and review access controls to identify and address any misconfigurations or vulnerabilities.</li>
+        </ul>
+    </div>
+
+</body>
+</html>

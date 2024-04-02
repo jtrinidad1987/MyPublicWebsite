@@ -1,52 +1,31 @@
-/* Reset default browser styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica;
     margin: 0;
     padding: 0;
     background-color: #f2f2f2;
+    background-image: url('../assets/Pictures/bg_pale.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-/* Container to center content and limit width */
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 80px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adding a semi-transparent white background to make the content more readable */
+    border-radius: 30px; /* Adding rounded corners to the container */
 }
 
-/* Main heading style */
 h1 {
     color: #333;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Secondary heading style */
-h2 {
+p {
     color: #555;
-    margin-top: 30px;
-}
-
-/* List style */
-ul {
-    list-style-type: circle;
-    padding: 0;
-}
-
-/* List item style */
-li {
-    margin-bottom: 10px;
-    list-style-type: circle;
-}
-
-/* Link style */
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-/* Hover state for links */
-a:hover {
-    text-decoration: underline;
+    margin-bottom: 20px;
 }
 
 .designs-container {
@@ -54,13 +33,31 @@ a:hover {
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .design {
-    max-width: 200px;
+    width: 250px;
     margin: 10px;
     text-align: center;
 }
+
 .design img {
     max-width: 200px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.navbar.scrolled {
+    background-color: #555; /* Change background color on scroll */
 }

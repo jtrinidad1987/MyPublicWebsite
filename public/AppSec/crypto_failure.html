@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptographic Failures</title>
+    <link rel="stylesheet" href="../../css/pagestyle.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #explanation {
+            margin-bottom: 20px;
+        }
+        #attack-example {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        #attack-output {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cryptographic Failures and Remediation</h1>
+
+    <div id="explanation">
+        <h2>What are Cryptographic Failures?</h2>
+        <p>Cryptographic failures occur when cryptographic algorithms or protocols are improperly implemented, leading to security vulnerabilities. These failures can result in various security risks, including data breaches, unauthorized access, and compromised confidentiality, integrity, or authenticity of data.</p>
+    </div>
+
+    <div id="attack-example">
+        <h2>Example of Cryptographic Failures</h2>
+        <p>Consider a web application that stores user passwords:</p>
+        <ul>
+            <li>The application uses a weak hashing algorithm (e.g., MD5 or SHA-1) to hash passwords before storing them in the database.</li>
+            <li>Attackers can easily crack hashed passwords using brute-force or dictionary attacks due to the weak hashing algorithm.</li>
+            <li>As a result, user passwords are compromised, leading to unauthorized access to user accounts.</li>
+        </ul>
+    </div>
+
+    <div id="attack-output">
+        <h2>Remediation</h2>
+        <p>To mitigate cryptographic failures, web developers should:</p>
+        <ul>
+            <li>Use strong cryptographic algorithms: Use industry-standard cryptographic algorithms (e.g., SHA-256, bcrypt) for hashing passwords and encrypting sensitive data.</li>
+            <li>Implement secure key management practices: Properly manage cryptographic keys and ensure they are securely generated, stored, and rotated.</li>
+            <li>Enable secure transport layer: Use HTTPS (TLS/SSL) to encrypt data in transit and protect against eavesdropping and man-in-the-middle attacks.</li>
+            <li>Regularly update cryptographic libraries: Keep cryptographic libraries and dependencies up-to-date to patch known vulnerabilities and weaknesses.</li>
+        </ul>
+    </div>
+
+</body>
+</html>
