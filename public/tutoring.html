@@ -10,6 +10,34 @@
             display: block;
             margin: 0 auto;
         }
+
+
+
+    h1 {
+        color: #333;
+    }
+    input[type="text"] {
+        padding: 10px;
+        margin-top: 20px;
+        width: 300px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 2px solid #ccc;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 18px;
+    }
     </style>
 </head>
 <body>
@@ -21,6 +49,7 @@
     <h2>Main Areas of Expertise:</h2>
     <ul>
         <li>C/C++</li>
+        <li>C#</li>
         <li>Java</li>
         <li>Python</li>
         <li>Matlab</li>
@@ -28,6 +57,27 @@
     </ul>
 
     <p>In addition to these core subjects, I have also assisted adults with more advanced topics such as application security and computer forensics.</p>
+    <p>Below is in example of source code I tipically ask students to write.</p>
+
+    <h1>Palindrome Checker</h1>
+<input type="text" id="userInput" placeholder="Enter a word or phrase">
+<button onclick="checkPalindrome()">Check</button>
+<div class="result" id="result"></div>
+
+<script>
+function checkPalindrome() {
+    const userInput = document.getElementById('userInput').value.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+    const reversedInput = userInput.split('').reverse().join('');
+    const resultElement = document.getElementById('result');
+
+    if (userInput === reversedInput) {
+        resultElement.innerHTML = `<p>"${userInput}" is a palindrome!</p>`;
+    } else {
+        resultElement.innerHTML = `<p>"${userInput}" is not a palindrome.</p>`;
+    }
+}
+</script>
+
     <a href="javascript:history.back()">Go back</a>
     </div>
 </body>
