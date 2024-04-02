@@ -1,0 +1,66 @@
+/* Reset default browser styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+/* Container to center content and limit width */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Main heading style */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Secondary heading style */
+h2 {
+    color: #555;
+    margin-top: 30px;
+}
+
+/* List style */
+ul {
+    list-style-type: circle;
+    padding: 0;
+}
+
+/* List item style */
+li {
+    margin-bottom: 10px;
+    list-style-type: circle;
+}
+
+/* Link style */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Hover state for links */
+a:hover {
+    text-decoration: underline;
+}
+
+.designs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.design {
+    max-width: 200px;
+    margin: 10px;
+    text-align: center;
+}
+.design img {
+    max-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
