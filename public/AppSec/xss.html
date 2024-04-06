@@ -50,7 +50,33 @@
             <li>Update frameworks and libraries: Keep software dependencies up-to-date to patch known vulnerabilities.</li>
         </ul>
     </div>
+    <p></p>
+    <div id="attack-output">
+        <h2>Example:</h2>
+        <h3>Palindrome Checker</h3>
+        <input type="text" id="userInput" placeholder="Enter a word or phrase">
+        <button onclick="checkPalindrome()">Check</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function checkPalindrome() {
+            const userInput = document.getElementById('userInput');
+            const reversedInput = userInput.split('').reverse().join('');
+            const resultElement = document.getElementById('result');
+        
+            if (userInput === reversedInput) {
+                resultElement.innerHTML = `<p>"${userInput}" is a palindrome!</p>`;
+            } else {
+                resultElement.innerHTML = `<p>"${userInput}" is not a palindrome.</p>`;
+            }
+        }
+    </script>
+
+    <p>This web application is supceptible to XSS attacks. You can try it by entering the following script in the input box</p>
+    <pre><code>&lt;script&gt;alert('You have been hacked!')&lt;/script&gt;</code></pre>
 
 
 </body>
 </html>
+
