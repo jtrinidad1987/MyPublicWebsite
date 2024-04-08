@@ -23,4 +23,8 @@ driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 driver.get('https://jtrinidad1987.github.io/MyPublicWebsite/')
 print(driver.title)
-print("Hello, World")
+print("Getting all links in the page")
+
+elems = driver.find_elements_by_xpath("//a[@href]")
+for elem in elems:
+    print(elem.get_attribute("href"))

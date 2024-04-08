@@ -52,30 +52,24 @@
     </div>
     <p></p>
     <div id="attack-output">
-        <h2>Example:</h2>
-        <h3>Palindrome Checker</h3>
-        <input type="text" id="userInput" placeholder="Enter a word or phrase">
-        <button onclick="checkPalindrome()">Check</button>
-        <div class="result" id="result"></div>
+        <form>
+            <label for="input">Enter your name:</label><br>
+            <input type="text" id="input" name="input"><br><br>
+            <button type="button" onclick="displayMessage()">Submit</button>
+          </form>
+          <div id="output"></div>
     </div>
-
+    
     <script>
-        function checkPalindrome() {
-            const userInput = document.getElementById('userInput');
-            const reversedInput = userInput.split('').reverse().join('');
-            const resultElement = document.getElementById('result');
-        
-            if (userInput === reversedInput) {
-                alert(`<p>"${userInput}" is a palindrome!</p>`);
-            } else {
-                alert(`<p>"${userInput}" is not a palindrome.</p>`);
-            }
-        }
+    function displayMessage() {
+        var userInput = document.getElementById('input').value;
+        // Vulnerable code: directly injecting user input into HTML
+        document.getElementById('output').innerHTML = '<p>Hello, ' + userInput + '!</p>';
+      }
     </script>
 
     <p>This web application is supceptible to XSS attacks. You can try it by entering the following script in the input box</p>
     <pre><code>&lt;script&gt;alert('You have been hacked!')&lt;/script&gt;</code></pre>
-
 
 </body>
 </html>
