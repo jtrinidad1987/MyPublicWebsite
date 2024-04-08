@@ -1,6 +1,10 @@
 name: scrape
 on:
-  workflow_dispatch:
+  workflow_run:
+      workflows: ['build-and-deploy']
+      types: [completed]
+      branches:
+          - 'master'
 jobs:
   scrape:
     runs-on: ubuntu-latest
