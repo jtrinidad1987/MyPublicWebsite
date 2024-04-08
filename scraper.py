@@ -23,4 +23,3 @@ driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 driver.get('https://jtrinidad1987.github.io/MyPublicWebsite/')
 print(driver.title)
-print(driver.)
