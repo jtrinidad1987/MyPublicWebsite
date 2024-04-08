@@ -1,7 +1,7 @@
 name: scrape
 on:
   workflow_run:
-      workflows: ['build-and-deploy']
+      workflows: ['pages-build-deployment']
       types: [completed]
       branches:
           - 'master'
