@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click Numbers in Order</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    .header {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: darkblue;
+      z-index: 1000;
+    }
+    .number {
+      position: absolute;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .message-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: none;
+    }
+    .message-container h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .message-container button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Haz clic en cada círculo en orden</div>
+
+  <div class="message-container" id="message-container">
+    <h1>¡Buen trabajo!</h1>
+    <button id="restart-button">Empezar de nuevo</button>
+    <button id="next-lesson-button">Próxima lección</button>
+  </div>
+
+  <audio id="pop-sound" src="../../assets/Sounds/pop.mp3"></audio>
+
+  <script>
+    let currentNumber = 1;
+
+    // Function to generate a random color
+    function getRandomColor() {
+      return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+    }
+
+    // Function to check if two elements overlap
+    function isOverlapping(x1, y1, x2, y2, size) {
+      return Math.abs(x1 - x2) < size && Math.abs(y1 - y2) < size;
+    }
+
+    // Function to position circles without overlapping
+    function getNonOverlappingPosition(existingPositions, size) {
+      let x, y;
+      let maxAttempts = 1000;
+      do {
+        x = Math.random() * (window.innerWidth - size);
+        y = Math.random() * (window.innerHeight - size);
+        maxAttempts--;
+      } while (
+        existingPositions.some(pos => isOverlapping(x, y, pos.x, pos.y, size)) &&
+        maxAttempts > 0
+      );
+      return { x, y };
+    }
+
+    function startGame() {
+      currentNumber = 1;
+
+      // Remove any existing numbers
+      document.querySelectorAll('.number').forEach(number => number.remove());
+
+      const existingPositions = [];
+      const size = 100;
+
+      // Generate 5 random numbers
+      const numbers = Array.from({ length: 5 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+
+      // Create and place numbers randomly without overlapping
+      numbers.forEach(num => {
+        const div = document.createElement('div');
+        div.className = 'number';
+        div.textContent = num;
+
+        // Assign a random background color
+        div.style.backgroundColor = getRandomColor();
+
+        // Get non-overlapping position
+        const { x, y } = getNonOverlappingPosition(existingPositions, size);
+        div.style.left = `${x}px`;
+        div.style.top = `${y}px`;
+
+        existingPositions.push({ x, y });
+
+        // Add event listener for click
+        div.addEventListener('click', () => {
+          if (parseInt(div.textContent) === currentNumber) {
+            playPopSound();
+            div.remove();
+            currentNumber++;
+            if (currentNumber > 5) {
+              showEndMessage();
+            }
+          }
+        });
+
+        document.body.appendChild(div);
+      });
+    }
+
+    function playPopSound() {
+      const popSound = document.getElementById('pop-sound');
+      popSound.currentTime = 0; // Reset the sound
+      popSound.play();
+    }
+
+    function showEndMessage() {
+      const messageContainer = document.getElementById('message-container');
+      messageContainer.style.display = 'block';
+    }
+
+    // Event listeners for buttons
+    document.getElementById('restart-button').addEventListener('click', () => {
+      document.getElementById('message-container').style.display = 'none';
+      startGame();
+    });
+
+    document.getElementById('next-lesson-button').addEventListener('click', () => {
+      window.location.href = 'next-lesson.html'; // Change this to your desired page
+    });
+
+    // Start the game initially
+    startGame();
+  </script>
+</body>
+</html>
