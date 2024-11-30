@@ -51,6 +51,8 @@
     <button id="next-lesson-button">Próxima lección</button>
   </div>
 
+  <audio id="pop-sound" src="../../assets/Sounds/245645__unfa__cartoon-pop-clean.flac"></audio>
+ 
   <script>
     let currentNumber = 1;
 
@@ -59,16 +61,39 @@
       return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
     }
 
+    // Function to check if two elements overlap
+    function isOverlapping(x1, y1, x2, y2, size) {
+      return Math.abs(x1 - x2) < size && Math.abs(y1 - y2) < size;
+    }
+
+    // Function to position circles without overlapping
+    function getNonOverlappingPosition(existingPositions, size) {
+      let x, y;
+      let maxAttempts = 1000;
+      do {
+        x = Math.random() * (window.innerWidth - size);
+        y = Math.random() * (window.innerHeight - size);
+        maxAttempts--;
+      } while (
+        existingPositions.some(pos => isOverlapping(x, y, pos.x, pos.y, size)) &&
+        maxAttempts > 0
+      );
+      return { x, y };
+    }
+
     function startGame() {
       currentNumber = 1;
 
       // Remove any existing numbers
       document.querySelectorAll('.number').forEach(number => number.remove());
 
+      const existingPositions = [];
+      const size = 100;
+
       // Generate 5 random numbers
       const numbers = Array.from({ length: 5 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
 
-      // Create and place numbers randomly
+      // Create and place numbers randomly without overlapping
       numbers.forEach(num => {
         const div = document.createElement('div');
         div.className = 'number';
@@ -77,13 +102,17 @@
         // Assign a random background color
         div.style.backgroundColor = getRandomColor();
 
-        // Position randomly
-        div.style.left = `${Math.random() * (window.innerWidth - 110)}px`;
-        div.style.top = `${Math.random() * (window.innerHeight - 110)}px`;
+        // Get non-overlapping position
+        const { x, y } = getNonOverlappingPosition(existingPositions, size);
+        div.style.left = `${x}px`;
+        div.style.top = `${y}px`;
+
+        existingPositions.push({ x, y });
 
         // Add event listener for hover
         div.addEventListener('mouseenter', () => {
           if (parseInt(div.textContent) === currentNumber) {
+            playPopSound();
             div.remove();
             currentNumber++;
             if (currentNumber > 5) {
@@ -94,6 +123,12 @@
 
         document.body.appendChild(div);
       });
+    }
+
+    function playPopSound() {
+      const popSound = document.getElementById('pop-sound');
+      popSound.currentTime = 0; // Reset the sound
+      popSound.play();
     }
 
     function showEndMessage() {
