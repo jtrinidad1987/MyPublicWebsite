@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop Lesson</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+      background-color: #f0f8ff;
+    }
+    .header {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: darkblue;
+      z-index: 1000;
+    }
+    .circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+      top: 50%;
+      left: 50px;
+      transform: translateY(-50%);
+      cursor: grab;
+    }
+    .drop-zone {
+      width: 150px;
+      height: 400px;
+      background-color: lightgray;
+      border: 3px dashed gray;
+      position: absolute;
+      right: 50px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .message-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: none;
+    }
+    .message-container h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .message-container button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Arrastra el círculo dentro del rectángulo</div>
+
+  <div class="circle" id="circle" draggable="true"></div>
+
+  <div class="drop-zone" id="drop-zone"></div>
+
+  <div class="message-container" id="message-container">
+    <h1>¡Buen trabajo!</h1>
+    <button id="restart-button">Empezar de nuevo</button>
+    <button id="next-lesson-button">Próxima lección</button>
+  </div>
+
+  <script>
+    const circle = document.getElementById('circle');
+    const dropZone = document.getElementById('drop-zone');
+    const messageContainer = document.getElementById('message-container');
+
+    // Enable drag functionality
+    circle.addEventListener('dragstart', (e) => {
+      e.dataTransfer.setData('text/plain', 'circle');
+      // Make the circle invisible during dragging
+      setTimeout(() => {
+        circle.style.visibility = 'hidden';
+      }, 0);
+    });
+
+    // Allow drop on drop-zone
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault(); // Required to allow dropping
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const droppedItem = e.dataTransfer.getData('text/plain');
+      if (droppedItem === 'circle') {
+        // Place the circle inside the drop-zone
+        const rect = dropZone.getBoundingClientRect();
+        circle.style.position = 'absolute';
+        circle.style.left = `${rect.left + rect.width / 2 - circle.offsetWidth / 2}px`;
+        circle.style.top = `${rect.top + rect.height / 2 - circle.offsetHeight / 2}px`;
+
+        // Make the circle visible again
+        circle.style.visibility = 'visible';
+
+        // Disable further dragging
+        circle.setAttribute('draggable', 'false');
+        circle.style.cursor = 'default';
+
+        // Show success message
+        showEndMessage();
+      }
+    });
+
+    
+    function showEndMessage() {
+      messageContainer.style.display = 'block';
+    }
+
+    // Restart the lesson
+    document.getElementById('restart-button').addEventListener('click', () => {
+      messageContainer.style.display = 'none';
+      circle.style.left = '50px';
+      circle.style.top = '50%';
+      circle.setAttribute('draggable', 'true');
+      circle.style.cursor = 'grab';
+      circle.style.visibility = 'visible';
+    });
+
+    // Go to the next lesson
+    document.getElementById('next-lesson-button').addEventListener('click', () => {
+      window.location.href = 'next-lesson.html'; // Change to your next lesson URL
+    });
+  </script>
+</body>
+</html>
