@@ -10,6 +10,16 @@
       overflow: hidden;
       font-family: Arial, sans-serif;
     }
+    .header {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: darkblue;
+      z-index: 1000;
+    }
     .number {
       position: absolute;
       font-size: 32px;
@@ -45,14 +55,16 @@
   </style>
 </head>
 <body>
+  <div class="header">Pasa el ratón sobre cada círculo en orden</div>
+
   <div class="message-container" id="message-container">
     <h1>¡Buen trabajo!</h1>
     <button id="restart-button">Empezar de nuevo</button>
     <button id="next-lesson-button">Próxima lección</button>
   </div>
 
-  <audio id="pop-sound" src="../../assets/Sounds/245645__unfa__cartoon-pop-clean.flac"></audio>
- 
+  <audio id="pop-sound" src="../../assets/Sounds/pop.mp3"></audio>
+
   <script>
     let currentNumber = 1;
 
@@ -140,10 +152,10 @@
     document.getElementById('restart-button').addEventListener('click', () => {
       document.getElementById('message-container').style.display = 'none';
       startGame();
-    });
+    }); 
 
     document.getElementById('next-lesson-button').addEventListener('click', () => {
-      window.location.href = 'next-lesson.html'; // Change this to your desired page
+      window.location.href = 'lesson2.html'; // Change this to your desired page
     });
 
     // Start the game initially
