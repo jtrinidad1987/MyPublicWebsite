@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hover Numbers in Order</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    .number {
+      position: absolute;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      background: darkblue;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .message-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: none;
+    }
+    .message-container h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .message-container button {
+      font-size: 1rem;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="message-container" id="message-container">
+    <h1>¡Buen trabajo!</h1>
+    <button id="restart-button">Empezar de nuevo</button>
+    <button id="next-lesson-button">Próxima lección</button>
+  </div>
+
+  <script>
+    let currentNumber = 1;
+
+    function startGame() {
+      currentNumber = 1;
+
+      // Remove any existing numbers
+      document.querySelectorAll('.number').forEach(number => number.remove());
+
+      // Generate 5 random numbers
+      const numbers = Array.from({ length: 5 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+
+      // Create and place numbers randomly
+      numbers.forEach(num => {
+        const div = document.createElement('div');
+        div.className = 'number';
+        div.textContent = num;
+
+        // Position randomly
+        div.style.left = `${Math.random() * (window.innerWidth - 60)}px`;
+        div.style.top = `${Math.random() * (window.innerHeight - 60)}px`;
+
+        // Add event listener for hover
+        div.addEventListener('mouseenter', () => {
+          if (parseInt(div.textContent) === currentNumber) {
+            div.remove();
+            currentNumber++;
+            if (currentNumber > 5) {
+              showEndMessage();
+            }
+          }
+        });
+
+        document.body.appendChild(div);
+      });
+    }
+
+    function showEndMessage() {
+      const messageContainer = document.getElementById('message-container');
+      messageContainer.style.display = 'block';
+    }
+
+    // Event listeners for buttons
+    document.getElementById('restart-button').addEventListener('click', () => {
+      document.getElementById('message-container').style.display = 'none';
+      startGame();
+    });
+
+    document.getElementById('next-lesson-button').addEventListener('click', () => {
+      window.location.href = 'next-lesson.html'; // Change this to your desired page
+    });
+
+    // Start the game initially
+    startGame();
+  </script>
+</body>
+</html>
