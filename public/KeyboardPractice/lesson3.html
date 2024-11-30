@@ -80,6 +80,7 @@
   </div>
 
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
     const circle = document.getElementById('circle');
     const dropZone = document.getElementById('drop-zone');
     const messageContainer = document.getElementById('message-container');
@@ -139,6 +140,7 @@
     document.getElementById('next-lesson-button').addEventListener('click', () => {
       window.location.href = 'next-lesson.html'; // Change to your next lesson URL
     });
+    }
   </script>
 </body>
 </html>
