@@ -7,20 +7,6 @@
  * @description
  * This function takes the value from an input field with the id 'userInput',
  * removes any non-alphanumeric characters, converts it to lowercase, and checks
- * if it's a palindrome. The result is then displayed in an element with the id 'result'.
- *
- * @example
- * checkPalindrome();
- */
-/**
- * Checks if the input string is a palindrome.
- *
- * @function checkPalindrome
- * @returns {void}
- *
- * @description
- * This function takes the value from an input field with the id 'userInput',
- * removes any non-alphanumeric characters, converts it to lowercase, and checks
  * if it's a palindrome. The result is then displayed in an element with the id 'result',
  * after sanitizing the input to prevent XSS attacks.
  *
